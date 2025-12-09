@@ -8,7 +8,10 @@
 #include <iostream>
 #include <bits/ostream.tcc>
 
-
+/**
+ * Créer un objet joueur en demandant à l'utilisateur des informations.
+ * @return le joueur qui vient d'être créé
+ */
 Player createPlayer()
 {
     string name = "";

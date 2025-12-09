@@ -4,12 +4,13 @@
 
 #ifndef JEU_H
 #define JEU_H
+#include <iostream>
+#include <ostream>
+using namespace std;
 
 
+void draw_game_board(char tab[9]);
 
-class jeu {
-
-};
 
 
 

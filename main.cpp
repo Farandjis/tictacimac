@@ -4,12 +4,15 @@
 
 int main()
 {
+    /*
     std::cout << "Hello, World!" << std::endl;
-    // createPlayer();
+    // createPlayer("x"); // ça marche pas on peut lui dire x il s'en moque AAAAH
 
 
-    char tab[9] = {'x', ' ', ' ', 'o', 'x', ' ', ' ', ' ', 'x'};
+    char tab[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
     draw_game_board(tab);
+    */
 
+    mode_deux_joueurs();
     return 0;
 }

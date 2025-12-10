@@ -15,7 +15,8 @@ struct Player
     string symbol;
 };
 
-Player createPlayer();
+Player createPlayer(string symbolBanni = "");
+Player asuppr(string nom, string symbol);
 
 
 

@@ -10,9 +10,10 @@
 
 /**
  * Créer un objet joueur en demandant à l'utilisateur des informations.
+ * @param symbolBanni : (optionnel) permet d'empêcher l'utilisateur d'utiliser le symbol partagé
  * @return le joueur qui vient d'être créé
  */
-Player createPlayer()
+Player createPlayer(string symbolBanni)
 {
     string name = "";
     string nameSansEspace;
@@ -37,6 +38,10 @@ Player createPlayer()
     string symbolSansEspace;
     do
     {
+        if (symbolSansEspace == symbolBanni && symbolBanni != "")
+        {
+            cout << "Vous ne pouvez pas utiliser le caractère " << symbolBanni << endl;
+        }
         cout << "==== VOTRE SYMBOLE (1 caractère max) : ";
         getline(cin, symbol);
         symbolSansEspace = symbol;
@@ -45,13 +50,22 @@ Player createPlayer()
         symbolSansEspace.erase(
             remove_if(symbolSansEspace.begin(), symbolSansEspace.end(),
                       [](unsigned char c) { return isspace(c); }),
-            symbolSansEspace.end()
-        );
-    } while (symbolSansEspace.length() != 1); // tant que le nom indiqué est vide ou n'est composé que d'espaces (donc tant qu'il n'est pas valide)
+            symbolSansEspace.end());
 
+
+    } while (symbolSansEspace.length() != 1 || symbolSansEspace == symbolBanni); // tant que le nom indiqué est vide ou n'est composé que d'espaces (donc tant qu'il n'est pas valide)
+
+    cout << "==========================================================" << std::endl;
 
     Player player;
     player.name = nameSansEspace;
     player.symbol = symbolSansEspace;
+    return player;
+}
+
+Player asuppr(string nom, string symbol) {
+    Player player;
+    player.name = nom;
+    player.symbol = symbol;
     return player;
 }

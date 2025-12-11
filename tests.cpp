@@ -58,7 +58,8 @@ void tests_verif_joueur_gagnant()
         cout << "ECHEC TEST 1 " << endl; // réponse attendu : false, car il n'y a aucun jeton
     }
 
-    // TEST PLATEAU VERTICAL
+    // TEST VERIF PLATEAU EN VERTICAL
+    cout << "- test verif plateau en vertical" << endl;
     // 1°) cases 1 4 7
     int nbTour = 0;
     for (int i = 0; i < 9; i = i + 3)
@@ -121,6 +122,78 @@ void tests_verif_joueur_gagnant()
         }
         nbTour++;
     }
+
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+
+    // TEST VERIF PLATEAU EN HORIZONTAL
+    cout << "- test verif plateau en horizontal" << endl;
+    // 1°) cases 1 2 3
+    nbTour = 0;
+    for (int i = 0; i < 3; i++)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 3-1-a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 3-1-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+
+    // 2°) cases suite
+    nbTour = 0;
+    for (int i = 3; i < 6; i++)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 3-2-a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 3-2-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+
+    // 2°) cases suite
+    nbTour = 0;
+    for (int i = 6; i < 9; i++)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 3-3-a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 3-3-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+
 
     cout << "fin des tests ====================" << endl;
 

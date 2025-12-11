@@ -82,9 +82,31 @@ bool verif_joueur_gagnant(char plateau[9]){
     }
 
 
+    // VERIFICATION A L'HORIZONTAL =====================
+    for (int i = 1; i < 9; i += 3)
+    {
+        char valeurCaseTouteAGauche = plateau[i];
+        int nbDeFoisMemeValeurCase = 1;
+        // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
+        for (int j = i ; j < i+2; j++)
+        {
+            if (valeurCaseTouteAGauche == plateau[j])
+            {
+                nbDeFoisMemeValeurCase++; // si c'est la même valeur que tout à gauche
+            }
+        }
+
+        if (nbDeFoisMemeValeurCase == 3)
+        {
+            return true; // on a 3x la même valeur à la vertical -> donc 3x le même jeton -> donc le joueur a gagné
+        }
+    }
+
     return false;
 
-    // vérification à l'horizontal
+
+
+
     // vérification à la diagonale (bas gauche - haut droit)
     // vérification à la diagonale (bas droit - haut gauche)
 }

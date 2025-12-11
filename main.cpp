@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Player.h"
 #include "jeu.h"
+#include "tests.h"
 
 int main()
 {
@@ -13,6 +14,7 @@ int main()
     draw_game_board(tab);
     */
 
-    mode_deux_joueurs();
+    // mode_deux_joueurs();
+    tests_verif_action_possible();
     return 0;
 }

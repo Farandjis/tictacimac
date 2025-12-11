@@ -33,7 +33,15 @@ void draw_game_board(char plateau[9])
  * @return true si possible, false sinon
  */
 bool verif_action_possible(string action, char plateau[9]) {
+    if (action.length() != 1 || action[0] < '1' || action[0] > '9' ) {
+        // si l'entrée fait plus d'1 caractère OU que la valeur n'est pas un chiffre compris entre 1 et 9
+        return false;
+    }
 
+    int numeroCase = stoi(&action[0]) - 1;
+    string valeurDansLaCase = string(1, plateau[numeroCase]); // on converti la valeur char (plateau[numeroCase]) en string
+    bool estValide = valeurDansLaCase == action;
+    return estValide; // true si la case associé au numéro de case, correspod
 }
 
 /**

@@ -7,4 +7,6 @@ add_executable(Projet_Morpion main.cpp
         Player.cpp
         Player.h
         jeu.cpp
-        jeu.h)
+        jeu.h
+        tests.cpp
+        tests.h)

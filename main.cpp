@@ -16,5 +16,6 @@ int main()
 
     // mode_deux_joueurs();
     tests_verif_action_possible();
+    tests_verif_joueur_gagnant();
     return 0;
 }

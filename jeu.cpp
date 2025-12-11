@@ -46,12 +46,47 @@ bool verif_action_possible(string action, char plateau[9]) {
 
 /**
  * Vérifie si le joueur dont c'est le tour vient de gagner
+ *
+ * 0  1  2
+ * 3  4  5
+ * 6  7  8
+ *
+ * Si on parcourt à la verticale, on part du numéro case en hayt et on fait +3 pour passer à celle juste en dessous
+ * Si on parcourt à l'horizontal, on part du numéro case à droite et on fait +1 pour passer à celle juste à droite
+ * Diagonale haut gauche -> bas droite : +4
+ * Diagonale haut droite -> bas gauche : +2
  * @param action : case où le jeton vient d'être placé
   * @param plateau : plateau de jeu précédemment actualisé
  * @return true s'il a gagné
  */
-bool verif_joueur_gagnant(string action, char plateau[9]){
+bool verif_joueur_gagnant(char plateau[9]){
 
+    // VÉRIFICATION A LA VERTICALE =====================
+    for (int i = 0; i < 3; i++)
+    {
+        char valeurCaseToutEnHaut = plateau[i];
+        int nbDeFoisMemeValeurCase = 1;
+        // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
+        for (int j = i + 3; j < 9; j += 3)
+        {
+            if (valeurCaseToutEnHaut == plateau[j])
+            {
+                nbDeFoisMemeValeurCase++; // si c'est la même valeur que tout en haut
+            }
+        }
+
+        if (nbDeFoisMemeValeurCase == 3)
+        {
+            return true; // on a 3x la même valeur à la vertical -> donc 3x le même jeton -> donc le joueur a gagné
+        }
+    }
+
+
+    return false;
+
+    // vérification à l'horizontal
+    // vérification à la diagonale (bas gauche - haut droit)
+    // vérification à la diagonale (bas droit - haut gauche)
 }
 
 /**

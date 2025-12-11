@@ -6,5 +6,6 @@
 #define PROJET_MORPION_TESTS_H
 
 void tests_verif_action_possible();
+void tests_verif_joueur_gagnant();
 
 #endif //PROJET_MORPION_TESTS_H

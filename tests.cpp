@@ -23,14 +23,14 @@ void tests_verif_action_possible() {
     // test 10
     numeroTests++;
     plateau[0] = 'x';
-    if (!verif_action_possible("1", plateau)) {
+    if (verif_action_possible("1", plateau)) {
         cout << "ECHEC TEST " << numeroTests << endl; // réponse attendu : false, car il y a un jeton case 1
     }
 
     //test 11
     numeroTests++;
     plateau[5] = 't';
-    if (!verif_action_possible("6", plateau)) {
+    if (verif_action_possible("6", plateau)) {
         cout << "ECHEC TEST " << numeroTests << endl; // réponse attendu : false, car il y a un jeton case 6
     }
 
@@ -40,5 +40,88 @@ void tests_verif_action_possible() {
         cout << "ECHEC TEST " << numeroTests << endl; // réponse attendu : true, car il y n'a pas de jeton case 5
     }
 
-    cout << "fin des tests" << endl;
+    cout << "fin des tests ====================" << endl;
+}
+
+
+
+void tests_verif_joueur_gagnant()
+{
+
+    char parDefaut[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    char plateau[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    int numeroTests = 1;
+
+    cout << "tests_verif_joueur_gagnant =======" << endl;
+    // TEST PLATEAU VIDE
+    if (verif_joueur_gagnant(plateau)) {
+        cout << "ECHEC TEST 1 " << endl; // réponse attendu : false, car il n'y a aucun jeton
+    }
+
+    // TEST PLATEAU VERTICAL
+    // 1°) cases 1 4 7
+    int nbTour = 0;
+    for (int i = 0; i < 9; i = i + 3)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 2-1-a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 2-1-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+
+    // 2°) cases 2 5 8
+    nbTour = 0;
+    for (int i = 1; i < 9; i = i + 3)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 2-2-a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 2-2-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+
+    // 2°) cases 3 6 9
+    nbTour = 0;
+    for (int i = 2; i < 9; i = i + 3)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 2-3-a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 2-3-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+    cout << "fin des tests ====================" << endl;
+
 }

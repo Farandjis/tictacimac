@@ -199,12 +199,11 @@ void mode_deux_joueurs()
     cout << "Par tirage aléatoire, le joueur " << tirage + 1 << " est invité à commencer la partie." << endl;
 
     int quiJoue = tirage;
-    bool continuer = true;
     // PARTIE
     do {
         Player leJoueurQuiJoue = (quiJoue == 0) ? joueur1 : joueur2;
 
-        cout << endl << endl << "============================= " << "TOUR JOUEUR " << quiJoue + 1 << " << (" << leJoueurQuiJoue.symbol << ") =============================";
+        cout << endl << endl << "============================= " << "TOUR JOUEUR " << quiJoue + 1 << " (" << leJoueurQuiJoue.symbol << ") =============================";
         cout << endl;
 
         string reponse = "";
@@ -239,7 +238,8 @@ void mode_deux_joueurs()
         if (verif_joueur_gagnant(plateau))
         {
             // écrit de tête donc à revoir
-            continuer = false;
+            cout << "\n\n\n\n\n\n";
+            cout << "FELICITATION " << leJoueurQuiJoue.name << " (" << leJoueurQuiJoue.symbol <<  ") A GAGNÉ(E) !!!!!!! " << endl;
             break;
         }
 
@@ -247,7 +247,8 @@ void mode_deux_joueurs()
         if (!verif_cases_encore_disponible(plateau))
         {
             // écrit de tête donc à revoir
-            continuer = false;
+            cout << "\n\n\n\n\n\n";
+            cout << "Il n'y a plus de place sur le plateau... Vous êtes tous les deux à égalité." << endl;
             break;
         }
 
@@ -255,7 +256,7 @@ void mode_deux_joueurs()
         // ETAPE 7
         quiJoue = (quiJoue+1) % 2;
         cout << quiJoue << endl;
-    } while (continuer);
+    } while (true);
 }
 
 

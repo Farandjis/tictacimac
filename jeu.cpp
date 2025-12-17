@@ -145,11 +145,22 @@ bool verif_joueur_gagnant(char plateau[9]){
 
 /**
  * Vérifie si la partie peut se poursuivre, ou bien s'il n'y a plus de place disponible.
+ * Pour savoir s'il reste une place de disponible, c'est sympa : si la valeur de la case est un chiffre : elle est vide !
+ * Rappel : l'utilisateur ne peut pas choisir un chiffre comme symbol.
  * @param plateau : plateau de jeu précédemment actualisé
  * @return true si la partie peut se poursuivre (toutes les cases ne sont pas occupés)
  */
 bool verif_cases_encore_disponible(char plateau[9]){
+    for (int i = 0; i < 9; i++)
+    {
+        if (plateau[i] >= '1' && plateau[i] <= '9')
+        {
+            return true; // une case vide a été trouvé
+        }
+        return false; // si on arrive là, c'est qu'aucune case vide n'a été trouvé
+    }
 
+    return false;
 }
 
 

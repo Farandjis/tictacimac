@@ -5,6 +5,28 @@
 
 #include "jeu.h"
 
+
+void test_verif_cases_encore_disponible()
+{
+    char plateau[9] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    if (!verif_cases_encore_disponible(plateau))
+    {
+        cout << "ERREUR VERIF CASES DISPO : puisque tout est libre !" << endl;
+    }
+
+    plateau[3] = 'x';
+    if (!verif_cases_encore_disponible(plateau))
+    {
+        cout << "ERREUR VERIF CASES DISPO : puisque 8 cases sont libre !" << endl;
+    }
+
+    char plateauComplet[9] = {'x', 'x', 'x', 'o', 'x', 'o', 'o', 'x', 'o'};
+    if (verif_cases_encore_disponible(plateauComplet))
+    {
+        cout << "ERREUR VERIF CASES DISPO : puisque qu'aucune case n'est dispo !" << endl;
+    }
+}
+
 void tests_verif_action_possible() {
     cout << "tests_verif_action_possible =======" << endl;
     int numeroTests = 1;

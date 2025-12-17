@@ -7,5 +7,6 @@
 
 void tests_verif_action_possible();
 void tests_verif_joueur_gagnant();
+void test_verif_cases_encore_disponible();
 
 #endif //PROJET_MORPION_TESTS_H

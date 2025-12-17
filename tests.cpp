@@ -174,7 +174,7 @@ void tests_verif_joueur_gagnant()
     // on réinitialise le plateau par les valeurs par défaut.
     std::copy(parDefaut, parDefaut + 9, plateau);
 
-    // 2°) cases suite
+    // 3°) cases suite
     nbTour = 0;
     for (int i = 6; i < 9; i++)
     {
@@ -188,6 +188,52 @@ void tests_verif_joueur_gagnant()
         else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
         {
             cout << "ECHEC TEST 3-3-b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+
+    // TEST VERIF PLATEAU DIAGO BG -> HD
+    cout << "- test verif plateau en diago bg -> hd" << endl;
+    nbTour = 0;
+    for (int i = 7; i > 0; i-=2)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 4a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 4b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
+
+        }
+        nbTour++;
+    }
+
+    // on réinitialise le plateau par les valeurs par défaut.
+    std::copy(parDefaut, parDefaut + 9, plateau);
+    
+    // TEST VERIF PLATEAU DIAGO HG -> BD
+    cout << "- test verif plateau en diago HG -> BD" << endl;
+    nbTour = 0;
+    for (int i = 1; i < 9; i+=4)
+    {
+        plateau[i] = 'x';
+
+        if (nbTour < 2 && verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 5a " << endl; // réponse attendu : false, car il n'y a pas 3 jeton
+
+        }
+        else if (nbTour == 2 && !verif_joueur_gagnant(plateau))
+        {
+            cout << "ECHEC TEST 5b " << endl; // réponse attendu : true, car il y a pas 3 même jeton
 
         }
         nbTour++;

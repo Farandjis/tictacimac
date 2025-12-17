@@ -55,6 +55,10 @@ bool verif_action_possible(string action, char plateau[9]) {
  * Si on parcourt à l'horizontal, on part du numéro case à droite et on fait +1 pour passer à celle juste à droite
  * Diagonale haut gauche -> bas droite : +4
  * Diagonale haut droite -> bas gauche : +2
+ *
+ * Il est important de noter que les variables "nbDeFoisMemeValeurCase" compte la première case elle-même,
+ * donc même si elle est initialisée à 0, elle passera toujours à 1. Elle passera à 2 si deux mêmes caractères sont côte à côte, et 3 si 3 caractères sont alignés.
+ *
  * @param action : case où le jeton vient d'être placé
   * @param plateau : plateau de jeu précédemment actualisé
  * @return true s'il a gagné
@@ -65,9 +69,9 @@ bool verif_joueur_gagnant(char plateau[9]){
     for (int i = 0; i < 3; i++)
     {
         char valeurCaseToutEnHaut = plateau[i];
-        int nbDeFoisMemeValeurCase = 1;
+        int nbDeFoisMemeValeurCase = 0;
         // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
-        for (int j = i + 3; j < 9; j += 3)
+        for (int j = i; j < 9; j += 3)
         {
             if (valeurCaseToutEnHaut == plateau[j])
             {
@@ -83,12 +87,12 @@ bool verif_joueur_gagnant(char plateau[9]){
 
 
     // VERIFICATION A L'HORIZONTAL =====================
-    for (int i = 1; i < 9; i += 3)
+    for (int i = 0; i < 9; i += 3)
     {
         char valeurCaseTouteAGauche = plateau[i];
-        int nbDeFoisMemeValeurCase = 1;
+        int nbDeFoisMemeValeurCase = 0;
         // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
-        for (int j = i ; j < i+2; j++)
+        for (int j = i ; j <= i+2; j++)
         {
             if (valeurCaseTouteAGauche == plateau[j])
             {
@@ -102,13 +106,41 @@ bool verif_joueur_gagnant(char plateau[9]){
         }
     }
 
+
+
+    // VERIFICATION A LA DIAGONALE (bas gauche - haut droite) =====================
+    char valeurCaseTouteEnBasAGauche = plateau[7];
+    int nbDeFoisMemeValeurCase = 0;
+    for (int i = 7; i > 0; i -= 2)
+    {
+        // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
+        if (valeurCaseTouteEnBasAGauche == plateau[i])
+        {
+            nbDeFoisMemeValeurCase++; // si c'est la même valeur que tout à gauche
+        }
+    }
+    if (nbDeFoisMemeValeurCase == 3)
+    {
+        return true; // on a 3x la même valeur à la vertical -> donc 3x le même jeton -> donc le joueur a gagné
+    }
+
+    // VERIFICATION A LA DIAGONALE (haut gauche - bas droit) =====================
+    char valeurCaseTouteEnHautAGauche = plateau[1];
+    nbDeFoisMemeValeurCase = 0;
+    for (int i = 1; i < 9; i += 4)
+    {
+        // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
+        if (valeurCaseTouteEnHautAGauche == plateau[i])
+        {
+            nbDeFoisMemeValeurCase++; // si c'est la même valeur que tout à gauche
+        }
+    }
+    if (nbDeFoisMemeValeurCase == 3)
+    {
+        return true; // on a 3x la même valeur à la vertical -> donc 3x le même jeton -> donc le joueur a gagné
+    }
+
     return false;
-
-
-
-
-    // vérification à la diagonale (bas gauche - haut droit)
-    // vérification à la diagonale (bas droit - haut gauche)
 }
 
 /**

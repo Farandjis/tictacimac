@@ -203,11 +203,59 @@ void mode_deux_joueurs()
     bool continuer = true;
     // PARTIE
     do {
-        cout << endl << endl << "============================= " << "TOUR JOUEUR " << quiJoue + 1 << " =============================";
-        draw_game_board(plateau);
-        cout << endl;
-        cout << "Joueur " << quiJoue + 1 << " quel case choisissez vous ?" << endl << ">>";
+        Player leJoueurQuiJoue = (quiJoue == 0) ? joueur1 : joueur2;
 
+        cout << endl << endl << "============================= " << "TOUR JOUEUR " << quiJoue + 1 << " << (" << leJoueurQuiJoue.symbol << ") =============================";
+        cout << endl;
+
+        string reponse = "";
+        do
+        {
+
+            // ETAPE 1
+            draw_game_board(plateau);
+            cout << endl;
+
+            // ETAPE 2
+            if (reponse != "")
+            {
+                cout << "Réponse invalide. Choisissez une valeur parmis : ";
+                for (int i = 0; i < 9; i++)
+                {
+                    if (plateau[i] >= '1' && plateau[i] <= '9')
+                    {
+                        cout << plateau[i] << " ";
+                    }
+                }
+                cout << endl;
+            }
+            cout << "Joueur " << quiJoue + 1 << " quel case choisissez vous ?" << endl << ">> ";
+            getline(cin, reponse);
+        } while (!verif_action_possible(reponse, plateau)); // ETAPE 3
+
+        // ETAPE 4
+        plateau[reponse[0] - '0' - 1] = leJoueurQuiJoue.symbol[0];
+
+        // ETAPE 5
+        if (verif_joueur_gagnant(plateau))
+        {
+            // écrit de tête donc à revoir
+            continuer = false;
+            break;
+        }
+
+        // ETAPE 5
+        if (!verif_cases_encore_disponible(plateau))
+        {
+            // écrit de tête donc à revoir
+            continuer = false;
+            break;
+        }
+
+
+        // ETAPE 7
+        quiJoue = (quiJoue+1) % 2;
+        cout << quiJoue << endl;
     } while (continuer);
 }
 

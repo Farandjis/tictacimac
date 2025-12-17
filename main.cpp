@@ -14,9 +14,9 @@ int main()
     draw_game_board(tab);
     */
 
-    // mode_deux_joueurs();
+    mode_deux_joueurs();
     // tests_verif_action_possible();
     // tests_verif_joueur_gagnant();
-    test_verif_cases_encore_disponible();
+    // test_verif_cases_encore_disponible();
     return 0;
 }

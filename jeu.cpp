@@ -157,10 +157,9 @@ bool verif_cases_encore_disponible(char plateau[9]){
         {
             return true; // une case vide a été trouvé
         }
-        return false; // si on arrive là, c'est qu'aucune case vide n'a été trouvé
     }
 
-    return false;
+    return false; // si on arrive là, c'est qu'aucune case vide n'a été trouvé
 }
 
 

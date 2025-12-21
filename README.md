@@ -2,7 +2,7 @@ Matthieu FARANDJIS\
 E3 IMAC
 
 <div align="center">
-<img height="95"  src="https://thotismedia.com/wp-content/uploads/2024/02/esiee-scaled.jpg" title="logo esiee paris"/>
+<img height="95"  src="readme_src/esiee-scaled.jpg" title="logo esiee paris"/>
 
 # SAÉ INF3-FI - Cluster Installation
 
@@ -37,7 +37,14 @@ Pour lancer le jeu, il suffit d'exécuter Projet_Morpion.exe qui se trouve dans 
 Il y a également un raccourci Windows dans le répertoire principal du projet.
 
 ## <a id="p2"></a> II - Explication sur l'organisation du code et choix d'implémentation
+- **main.cpp** : fichier C++ principale à exécuter
+- **jeu.cpp/.h** : contient TOUTES les fonctions liées au déroulement du jeu : modes de jeu, vérifications, choix de l'IA...
+- **Player.cpp/.h** : contient la structure Player ainsi que les fonctions permettant la création d'un joueur.
+- **tests.cpp/.h** : contient quelques fonctions qui test le bon fonctionnement des fonctions vérifiant la victoire,
+  l'égalité et s'il reste des cases disponibles.
+
 ## <a id="p3"></a> III - Fonctionnalités supplémentaires
+
 ## <a id="p4"></a> IV - Bilan rapide sur les problèmes rencontrés et solutions trouvées
 
 ### Exécuter Projet_Morpion.exe en dehors de CLion

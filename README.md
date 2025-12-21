@@ -38,7 +38,9 @@ Il y a également un raccourci Windows dans le répertoire principal du projet.\
 \
 L'utilisateur est accueilli par un menu ; il lui suffit d'indiquer le mode de jeu souhaité (1, 2 ou 3) à l'aide de son clavier pour que la partie commence.\
 Le programme permet à l'utilisateur de saisir son nom ainsi que de choisir un symbole. Le joueur 2 (ou le joueur affrontant l'IA) ne peut pas choisir le même symbole que le joueur 1 (ou celui de l'IA).`\
-À la fin de la partie, le jeu indique le vainqueur ou signale s'il y a une égalité. Pour recommencer une partie, il est nécessaire de réexécuter le programme.
+À la fin de la partie, le jeu indique le vainqueur ou signale s'il y a une égalité. Pour recommencer une partie, il est nécessaire de réexécuter le programme.\
+\
+Remarque : le symbole de l'IA est **A** et il ne peut pas être changé.
 
 
 ## <a id="p2"></a> II - Explication sur l'organisation du code et choix d'implémentation

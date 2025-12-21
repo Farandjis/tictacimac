@@ -178,12 +178,18 @@ bool verif_cases_encore_disponible(char plateau[9]){
  *  6. Il vérifie s'il reste une case libre
  *  7. Il passe au joueur suivant
  */
-void mode_deux_joueurs()
+void mode_deux_joueurs(bool modeIA)
 {
 
     // INITIALISATION ===========================================================
-    Player joueur1 = createPlayer(); // création du joueur 1
-    Player joueur2 = createPlayer(joueur1.symbol); // création du joueur 2 dont on interdit le choix du caractère du joueur 1
+    Player joueur1;
+    if (modeIA) {
+        joueur1 = creerDirectementUnJoueur("IA", "O"); // création du joueur 1 IA
+    }
+    else {
+        joueur1 = createPlayer(); // création du joueur 1 humain
+    }
+    Player joueur2 = createPlayer(joueur1.symbol); // création du joueur 2 humain dont on interdit le choix du caractère du joueur 1
 
     // Player joueur1 = asuppr("toto", "o");
     // Player joueur2 = asuppr("titi", "i");
@@ -198,7 +204,7 @@ void mode_deux_joueurs()
     srand((unsigned int)time(0)); // initialisation de la série aléatoire
     int tirage = rand()%2; // tirage d'un nombre entre 0 et 1
     cout << endl << endl;
-    cout << "Par tirage aléatoire, le joueur " << tirage + 1 << " est invité à commencer la partie." << endl;
+    cout << "Par tirage aléatoire, le joueur " << joueurs[tirage].name << " est invité à commencer la partie." << endl;
 
     int quiJoue = tirage;
     // PARTIE
@@ -294,7 +300,13 @@ void menu()
     } while (reponseSansEspace.empty() || (reponseSansEspace[0] != '1' && reponseSansEspace[0] != '2'));
 
 
+    // MODE DEUX JOUEURS
     if (reponseSansEspace[0] == '1') {
         mode_deux_joueurs();
+    }
+
+    // MODE IA
+    else if (reponseSansEspace[0] == '2') {
+        mode_deux_joueurs(true); // true car IA
     }
 }

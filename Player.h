@@ -16,7 +16,7 @@ struct Player
 };
 
 Player createPlayer(string symbolBanni = "");
-Player asuppr(string nom, string symbol);
+Player creerDirectementUnJoueur(string nom, string symbol);
 
 
 

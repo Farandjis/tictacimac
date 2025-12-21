@@ -63,7 +63,13 @@ Player createPlayer(string symbolBanni)
     return player;
 }
 
-Player asuppr(string nom, string symbol) {
+/**
+ * Créer un joueur directement à l'aide des paramètres reçus
+ * @param nom : nom du joueur
+ * @param symbol : symbol du joueur
+ * @return le joueur créé
+ */
+Player creerDirectementUnJoueur(string nom, string symbol) {
     Player player;
     player.name = nom;
     player.symbol = symbol;

@@ -28,11 +28,8 @@ void draw_game_board(char plateau[9])
 
 }
 
-
-string choixIAAuxHasard(char plateau[9]) {
+vector<char> getCasesDisponibles(char plateau[9]) {
     vector<char> casesDisponibles;
-    srand((unsigned int)time(0)); // initialisation de la série aléatoire
-
     for (int i = 0; i < 9; i++)
     {
         if (plateau[i] >= '1' && plateau[i] <= '9')
@@ -41,9 +38,90 @@ string choixIAAuxHasard(char plateau[9]) {
         }
     }
 
+    return casesDisponibles;
+}
+
+
+/**
+ * Tire un nombre aléatoire entre 0 et le nombre de case dispo, puis renvoi la chiffre associé à la case choisit.
+ * @param plateau : plateau de jeu actualisé
+ * @return un string qui, si c'était un humain, équivaut à la réponse à la fonction C++ cin.
+ */
+string choixIAAuxHasard(char plateau[9]) {
+    srand((unsigned int)time(0)); // initialisation de la série aléatoire
+    vector<char> casesDisponibles = getCasesDisponibles(plateau);
+
     int idCaseChoisit = rand() % (casesDisponibles.size()); // tirage d'un nombre entre 0 et la taille du tableau casesDisponibles
 
     return to_string(casesDisponibles[idCaseChoisit]  - '0'); // le -'0' permet de convertir en entier (qu'on renvoi comme string car on manipule des string dans la suite du prog)
+}
+
+
+
+string choixIAAvancé(char plateau[9], Player ia, Player humain) {
+
+
+    if (plateau[4] == '5') {
+        return "5"; // en tant que joueur, la première case je tente de prendre coûte que coûte c'est la 5, donc mon IA doit faire ça.
+    }
+
+
+    vector<char> casesDisponibles = getCasesDisponibles(plateau); // les cases disponibles
+    char plateauCopie[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}; // note : les ' ' seront écrasé juste après)
+    std::copy(plateau, plateau + 9, plateauCopie); // on réinitialise plateauCopie par les valeurs du vrai plateau
+
+    // On va regarder si on peut gagner ce tour ci (si oui, on prend la case nous garantissant la victoire)
+    for (int i = 0; i < casesDisponibles.size(); i++) {
+        int idCaseARegarder = casesDisponibles[i] - '0' - 1; // -'0' pour convertir en entier, et -1 car l'index de la liste commence à 0
+        plateauCopie[idCaseARegarder] = ia.symbol[0]; // on place le symbol de l'IA
+
+        bool peutGagner = verif_joueur_gagnant(plateauCopie); // on regarde si en plaçant le symbol à cet endroit, on gagne
+        if (peutGagner) {
+            return to_string(casesDisponibles[i] - '0'); // on renvoi la case si elle mène à la victoire
+        }
+
+        // on reset afin de préparer le prochain test
+        std::copy(plateau, plateau + 9, plateauCopie); // on réinitialise plateauCopie par les valeurs du vrai plateau
+    }
+
+
+
+    // On va maintenant regarder si l'adversaire peut gagner (si oui, on va prendre la case qu'il espère)
+    for (int i = 0; i < casesDisponibles.size(); i++) {
+        int idCaseARegarder = casesDisponibles[i] - '0' - 1; // -'0' pour convertir en entier, et -1 car l'index de la liste commence à 0
+        plateauCopie[idCaseARegarder] = humain.symbol[0]; // on place le symbol de l'adversaire
+
+        bool peutGagner = verif_joueur_gagnant(plateauCopie); // on regarde si en plaçant le symbol à cet endroit, il gagne
+        if (peutGagner) {
+            return to_string(casesDisponibles[i] - '0'); // on renvoi la case si elle mène à sa victoire (on lui la prend)
+        }
+
+        // on reset afin de préparer le prochain test
+        std::copy(plateau, plateau + 9, plateauCopie); // on réinitialise plateauCopie par les valeurs du vrai plateau
+    }
+
+
+    // si on est ici : c'est que personne ne peut gagner dans l'état présent.
+    // dans ce cas, on va prendre une autre place stratégique que la case 5 : un angle.
+    // on tire au hasard un angle.
+
+    string idCoins[4] = {"1", "3", "7", "9"};
+    srand((unsigned int)time(0)); // initialisation de la série aléatoire
+    int idCaseChoisit = rand() % 4; // tirage d'un nombre entre 0 et 3 compris
+
+    // on va tester tous les angles. On commencera par l'angle qui a été tiré au sort. Si disponible, on le prend, sinon, on prend le suivant.
+    // C'est une boucle for qui itère 4 fois afin de tester les 4 angles. Si on a rien renvoyé à la fin de la quatrième itération, on considère que tous les angles sont pris.
+    for (int i = 0; i < 4; i++) {
+
+
+        if (verif_action_possible(idCoins[idCaseChoisit], plateau)) {
+            return idCoins[idCaseChoisit]; // cet angle est libre, on le prend
+        }
+
+        idCaseChoisit = (idCaseChoisit+1) % 4; // l'angle privilégié n'est pas disponible, on prend l'angle suivant
+    }
+
+    return choixIAAuxHasard(plateau); // si on est ici, c'est qu'on a aucun choix évident à effectuer -> on tire au hasard
 }
 
 
@@ -259,7 +337,8 @@ void mode_deux_joueurs(bool modeIA)
 
             if (modeIA && quiJoue == 0) {
                 // si le mode IA est actif et que c'est le tour du joueur 1 (note : l'IA est joeuur 1)
-                reponse = choixIAAuxHasard(plateau);
+                // reponse = choixIAAuxHasard(plateau);
+                reponse = choixIAAvancé(plateau, joueur1, joueur2);
                 cout << ">> L'IA a choisit : " << reponse << endl;
             }
             else {

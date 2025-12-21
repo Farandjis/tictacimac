@@ -58,4 +58,15 @@ Explication : il lui manquait une librairie.
 La résolution a été assez simple, j'ai demandé à Gemini pour gagner du temps.\
 Je tiens à souligner que l'utilisation de l'IA générative dans ce projet, en dehors de ce point, se résume à un rappel de certaines fonctions en C++ (comme transformer un char en string sans que ce soit l'ID ASCII qui soit le string).
 \
-Il m'a proposé de rajouter dans CMakeLists.txt : `set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++")` 
+Il m'a proposé de rajouter dans CMakeLists.txt : `set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static -static-libgcc -static-libstdc++")`
+
+
+### Représenter le plateau de jeu avec une simple liste
+L'énnoncé parlait de représenter un plateau de jeu avec une simple liste, et non pas 3 listes de 3 cases dans 1 grande liste.\
+J'ai donc représenté le plateau avec une seule liste, ce qui n'a pas été simple pour les fonctions de vérifications :
+je devais calculer quelle était la position de la prochaine case à analyser.\
+\
+Avec une liste dans une liste, les vérifications auraient été beaucoup plus simple !\
+Vérifier une colonne ? Pas de soucis : analyser uniquement la case en position X des trois listes, si même symbole : gagné.\
+Dans mon cas, je devais faire des +3 (0+3 = 3, case juste en dessous de 0) et parfois des +2... Cela ne m'avait pas parue aussi complexe que ça au départ !\
+Vu que je n'étais pas sûr de mes fonctions, j'ai fait des fonctions de test de manière pas super rigoureux mais qui font l'affaire quand même. 

@@ -262,20 +262,23 @@ bool verif_cases_encore_disponible(char plateau[9]){
 }
 
 
-/*+
+/**
  * Principe :
- *  Exécution du mode 1vs1
- *  Le mode créé les joueurs, explique et montre un plateau.
- *  Le jeu commence.
- *  1. Il affiche le plateau
- *  2. il demande au joueur X de placer son jeton
- *  3. il vérifie que sa réponse est valable (valeur correspondant à une case libre)
- *  4. Il modifie la liste pour y indiquer le symbole du joueur
- *  5. Il exécute une fonction pour vérifier si le joueur ne vient pas de gagner.
- *  6. Il vérifie s'il reste une case libre
- *  7. Il passe au joueur suivant
+ * Exécution du mode 1vs1
+ * Le mode créé les joueurs, explique et montre un plateau.
+ * Le jeu commence.
+ * 1. Il affiche le plateau
+ * 2. il demande au joueur X de placer son jeton
+ * 3. il vérifie que sa réponse est valable (valeur correspondant à une case libre)
+ * 4. Il modifie la liste pour y indiquer le symbole du joueur
+ * 5. Il exécute une fonction pour vérifier si le joueur ne vient pas de gagner.
+ * 6. Il vérifie s'il reste une case libre
+ * 7. Il passe au joueur suivant
+ *
+ * @param modeIA : true si le joueur joue contre une IA (mode IA aléatoire ou mode IA avancé)
+ * @param modeIAAvance : true si le joueur joue précisément en mode IA avancé (pris en compte uniquement si modeIA est true)
  */
-void mode_deux_joueurs(bool modeIA)
+void partie_de_jeu(bool modeIA, bool modeIAAvance)
 {
 
     // INITIALISATION ===========================================================
@@ -337,8 +340,14 @@ void mode_deux_joueurs(bool modeIA)
 
             if (modeIA && quiJoue == 0) {
                 // si le mode IA est actif et que c'est le tour du joueur 1 (note : l'IA est joeuur 1)
-                // reponse = choixIAAuxHasard(plateau);
-                reponse = choixIAAvancé(plateau, joueur1, joueur2);
+
+                if (modeIAAvance == true) {
+                    reponse = choixIAAvancé(plateau, joueur1, joueur2);
+                }
+                else {
+                    reponse = choixIAAuxHasard(plateau);
+                }
+
                 cout << ">> L'IA a choisit : " << reponse << endl;
             }
             else {
@@ -382,7 +391,8 @@ void menu()
     cout << "==========================" << "BIENVENUE DANS TIC TAC IMAC" << "==========================" << endl;
     cout << "Choissez un mode de jeu en répondant par la valeur associée :" << endl;
     cout << "   1. Mode deux joueurs" << endl;
-    cout << "   2. Mode contre IA" << endl;
+    cout << "   2. Mode contre IA Aléatoire" << endl;
+    cout << "   3. Mode contre IA Avancé" << endl;
     cout << "===============================================================================" << endl;
 
     string reponse = "";
@@ -404,16 +414,21 @@ void menu()
             );
 
         cout << reponseSansEspace << endl;
-    } while (reponseSansEspace.empty() || (reponseSansEspace[0] != '1' && reponseSansEspace[0] != '2'));
+    } while (reponseSansEspace.empty() || reponseSansEspace[0] < '1' || reponseSansEspace[0] > '3');
 
 
     // MODE DEUX JOUEURS
     if (reponseSansEspace[0] == '1') {
-        mode_deux_joueurs();
+        partie_de_jeu();
     }
 
-    // MODE IA
+    // MODE IA ALEATOIRE
     else if (reponseSansEspace[0] == '2') {
-        mode_deux_joueurs(true); // true car IA
+        partie_de_jeu(true); // true car IA
+    }
+
+    // MODE IA AVANCÉ
+    else if (reponseSansEspace[0] == '3') {
+        partie_de_jeu(true, true); // true car IA ET mode IA Avancé
     }
 }

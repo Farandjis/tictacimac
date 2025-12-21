@@ -13,7 +13,7 @@ using namespace std;
 
 
 void menu();
-void mode_deux_joueurs(bool modeIA = false);
+void partie_de_jeu(bool modeIA = false, bool modeIAAvance = false);
 void draw_game_board(char plateau[9]);
 
 bool verif_action_possible(string action, char plateau[9]);

@@ -14,7 +14,8 @@ int main()
     draw_game_board(tab);
     */
 
-    mode_deux_joueurs();
+    menu();
+    // mode_deux_joueurs();
     // tests_verif_action_possible();
     // tests_verif_joueur_gagnant();
     // test_verif_cases_encore_disponible();

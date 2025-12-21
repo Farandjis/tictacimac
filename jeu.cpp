@@ -4,6 +4,8 @@
 
 #include "jeu.h"
 
+#include <algorithm>
+
 #include "Player.h"
 
 /**
@@ -260,3 +262,39 @@ void mode_deux_joueurs()
 }
 
 
+
+
+void menu()
+{
+    cout << "==========================" << "BIENVENUE DANS TIC TAC IMAC" << "==========================" << endl;
+    cout << "Choissez un mode de jeu en répondant par la valeur associée :" << endl;
+    cout << "   1. Mode deux joueurs" << endl;
+    cout << "   2. Mode contre IA" << endl;
+    cout << "===============================================================================" << endl;
+
+    string reponse = "";
+    string reponseSansEspace;
+    do {
+        if (reponse != "") {
+            cout << "Votre réponse n'est pas valide, veuillez indiquer le chiffre associé à l'option voulu" << endl;
+        }
+        cout << "Votre choix : >> ";
+        getline(cin, reponse);
+
+        reponseSansEspace = reponse;
+
+        // on efface les espaces et autres caractères invisible
+        reponseSansEspace.erase(
+            remove_if(reponseSansEspace.begin(), reponseSansEspace.end(),
+                      [](unsigned char c) { return isspace(c); }),
+            reponseSansEspace.end()
+            );
+
+        cout << reponseSansEspace << endl;
+    } while (reponseSansEspace.empty() || (reponseSansEspace[0] != '1' && reponseSansEspace[0] != '2'));
+
+
+    if (reponseSansEspace[0] == '1') {
+        mode_deux_joueurs();
+    }
+}

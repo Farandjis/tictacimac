@@ -364,6 +364,8 @@ void partie_de_jeu(bool modeIA, bool modeIAAvance)
         {
             // écrit de tête donc à revoir
             cout << "\n\n\n\n\n\n";
+            draw_game_board(plateau);
+            cout << endl;
             cout << "FELICITATION " << leJoueurQuiJoue.name << " (" << leJoueurQuiJoue.symbol <<  ") A GAGNÉ(E) !!!!!!! " << endl;
             break;
         }
@@ -373,6 +375,8 @@ void partie_de_jeu(bool modeIA, bool modeIAAvance)
         {
             // écrit de tête donc à revoir
             cout << "\n\n\n\n\n\n";
+            draw_game_board(plateau);
+            cout << endl;
             cout << "Il n'y a plus de place sur le plateau... Vous êtes tous les deux à égalité." << endl;
             break;
         }

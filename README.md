@@ -39,16 +39,20 @@ Il y a également un raccourci Windows dans le répertoire principal du projet.\
 L'utilisateur est accueilli par un menu ; il lui suffit d'indiquer le mode de jeu souhaité (1, 2 ou 3) à l'aide de son clavier pour que la partie commence.\
 Le programme permet à l'utilisateur de saisir son nom ainsi que de choisir un symbole. Le joueur 2 (ou le joueur affrontant l'IA) ne peut pas choisir le même symbole que le joueur 1 (ou celui de l'IA).`\
 À la fin de la partie, le jeu indique le vainqueur ou signale s'il y a une égalité. Pour recommencer une partie, il est nécessaire de réexécuter le programme.
+
+
 ## <a id="p2"></a> II - Explication sur l'organisation du code et choix d'implémentation
 - **main.cpp** : fichier C++ principal à exécuter.
 - **jeu.cpp/.h** : contient TOUTES les fonctions liées au déroulement du jeu : modes de jeu, vérifications, choix de l'IA...
 - **Player.cpp/.h** : contient la structure `Player` ainsi que les fonctions permettant la création d'un joueur.
 - **tests.cpp/.h** : contient quelques fonctions qui testent le bon fonctionnement des fonctions vérifiant la victoire, l'égalité et la disponibilité des cases.
 
+
 ## <a id="p3"></a> III - Fonctionnalités supplémentaires
 
 J'ai implémenté un mode **IA Avancé** où l'IA va suivre un algorithme déterminant les meilleures actions à effectuer selon moi.\
 Il ne remplace pas le mode IA aléatoire ! Ce nouveau mode est disponible via l'option 3 du menu.
+
 
 ## <a id="p4"></a> IV - Bilan rapide sur les problèmes rencontrés et solutions trouvées
 
@@ -74,3 +78,10 @@ Avec une liste de listes (tableau 2D), les vérifications auraient été beaucou
 Vérifier une colonne ? Aucun souci : il suffit d'analyser la case en position X des trois listes ; si le symbole est identique : c'est gagné.\
 Dans mon cas, je devais effectuer des bonds de +3 (0+3 = 3, case juste en dessous de 0) et parfois des +2... Cela ne m'avait pas paru aussi complexe au départ !\
 Comme je n'étais pas certain de mes fonctions, j'ai créé des fonctions de test de manière peu rigoureuse, mais qui remplissent néanmoins leur rôle.
+
+
+### Amélioration à faire
+- Je pense qu'il pourrait être mieux d'éclater jeu.cpp qui contient beaucoup de fonctions variées.
+- Ça aurait peut-être été mieux de faire un .cpp dédié à l'IA, l'autre à la vérification du jeu (vérification de si un joueur a gagné, de s'il y a égalité ou encore de si l'action est possible ou non).
+- Je n'avais pas fait plus attention au début, mais les fonctions et variables données dans l'énoncé sont en anglais... J'ai créé mon code en français. Ça fait un mélange pas très beau (pour être honnête, je pensais tout traduire juste avant de rendre le travail mais je me suis très mal organisé !).
+- Je ne pense pas que mon code m'aurait permis d'effectuer l'amélioration Gomoku ou Puissance 4 tel quel. Je pense que j'aurais dû faire trop de modifications. En revanche, je pense qu'avec quelques petites modifications, l'Ultimate Tic-Tac-Toe était totalement compatible !

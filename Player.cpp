@@ -9,8 +9,8 @@
 #include <bits/ostream.tcc>
 
 /**
- * Créer un objet joueur en demandant à l'utilisateur des informations.
- * @param symbolBanni : (optionnel) permet d'empêcher l'utilisateur d'utiliser le symbol partagé
+ * Crée un objet joueur en demandant à l'utilisateur des informations.
+ * @param symbolBanni : (optionnel) permet d'empêcher l'utilisateur d'utiliser le symbole partagé
  * @return le joueur qui vient d'être créé
  */
 Player createPlayer(string symbolBanni)
@@ -64,9 +64,9 @@ Player createPlayer(string symbolBanni)
 }
 
 /**
- * Créer un joueur directement à l'aide des paramètres reçus
+ * Crée un joueur directement à l'aide des paramètres reçus
  * @param nom : nom du joueur
- * @param symbol : symbol du joueur
+ * @param symbol : symbole du joueur
  * @return le joueur créé
  */
 Player creerDirectementUnJoueur(string nom, string symbol) {

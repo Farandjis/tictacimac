@@ -10,7 +10,7 @@
 #include "Player.h"
 
 /**
- * Affiche le plateau de jeu à partir des données pris en paramètres.
+ * Affiche le plateau de jeu à partir des données prises en paramètres.
  * @param plateau : Tableau des données à afficher.
  */
 void draw_game_board(char plateau[9])
@@ -43,7 +43,7 @@ vector<char> getCasesDisponibles(char plateau[9]) {
 
 
 /**
- * Tire un nombre aléatoire entre 0 et le nombre de case dispo, puis renvoi la chiffre associé à la case choisit.
+ * Tire un nombre aléatoire entre 0 et le nombre de cases dispos, puis renvoie le chiffre associé à la case choisie.
  * @param plateau : plateau de jeu actualisé
  * @return un string qui, si c'était un humain, équivaut à la réponse à la fonction C++ cin.
  */
@@ -109,11 +109,10 @@ string choixIAAvancé(char plateau[9], Player ia, Player humain) {
     srand((unsigned int)time(0)); // initialisation de la série aléatoire
     int idCaseChoisit = rand() % 4; // tirage d'un nombre entre 0 et 3 compris
 
-    // on va tester tous les angles. On commencera par l'angle qui a été tiré au sort. Si disponible, on le prend, sinon, on prend le suivant.
-    // C'est une boucle for qui itère 4 fois afin de tester les 4 angles. Si on a rien renvoyé à la fin de la quatrième itération, on considère que tous les angles sont pris.
+    // On va tester tous les angles. On commencera par l'angle qui a été tiré au sort. Si disponible, on le prend, sinon, on prend le suivant.
+    // C'est une boucle for qui itère 4 fois afin de tester les 4 angles. Si on n'a rien renvoyé à la fin de la quatrième itération, on considère que tous les angles sont pris.
+
     for (int i = 0; i < 4; i++) {
-
-
         if (verif_action_possible(idCoins[idCaseChoisit], plateau)) {
             return idCoins[idCaseChoisit]; // cet angle est libre, on le prend
         }
@@ -126,8 +125,8 @@ string choixIAAvancé(char plateau[9], Player ia, Player humain) {
 
 
 /**
- * Vérifie si l'action demandée par le joueur (càd placer à tel endroit son jeton) est possible.
- * @param action : case demandé (en tout cas, ce qu'a écrit le joueur)
+ * Vérifie si l'action demandée par le joueur (cà-d placer son jeton à tel endroit) est possible.
+ * @param action : case demandée (en tout cas, ce qu'a écrit le joueur)
  * @param plateau : plateau de jeu précédemment actualisé
  * @return true si possible, false sinon
  */
@@ -150,18 +149,19 @@ bool verif_action_possible(string action, char plateau[9]) {
  * 3  4  5
  * 6  7  8
  *
- * Si on parcourt à la verticale, on part du numéro case en hayt et on fait +3 pour passer à celle juste en dessous
- * Si on parcourt à l'horizontal, on part du numéro case à droite et on fait +1 pour passer à celle juste à droite
+ * Si on parcourt à la verticale, on part du numéro de case en haut et on fait +3 pour passer à celle juste en dessous
+ * Si on parcourt à l'horizontale, on part du numéro de case à gauche et on fait +1 pour passer à celle juste à droite
  * Diagonale haut gauche -> bas droite : +4
  * Diagonale haut droite -> bas gauche : +2
  *
- * Il est important de noter que les variables "nbDeFoisMemeValeurCase" compte la première case elle-même,
+ * Il est important de noter que la variable "nbDeFoisMemeValeurCase" compte la première case elle-même,
  * donc même si elle est initialisée à 0, elle passera toujours à 1. Elle passera à 2 si deux mêmes caractères sont côte à côte, et 3 si 3 caractères sont alignés.
  *
  * @param action : case où le jeton vient d'être placé
-  * @param plateau : plateau de jeu précédemment actualisé
+ * @param plateau : plateau de jeu précédemment actualisé
  * @return true s'il a gagné
  */
+
 bool verif_joueur_gagnant(char plateau[9]){
 
     // VÉRIFICATION A LA VERTICALE =====================
@@ -244,10 +244,10 @@ bool verif_joueur_gagnant(char plateau[9]){
 
 /**
  * Vérifie si la partie peut se poursuivre, ou bien s'il n'y a plus de place disponible.
- * Pour savoir s'il reste une place de disponible, c'est sympa : si la valeur de la case est un chiffre : elle est vide !
- * Rappel : l'utilisateur ne peut pas choisir un chiffre comme symbol.
+ * Pour savoir s'il reste une place de disponible, c'est simple : si la valeur de la case est un chiffre : elle est vide !
+ * Rappel : l'utilisateur ne peut pas choisir un chiffre comme symbole.
  * @param plateau : plateau de jeu précédemment actualisé
- * @return true si la partie peut se poursuivre (toutes les cases ne sont pas occupés)
+ * @return true si la partie peut se poursuivre (toutes les cases ne sont pas occupées)
  */
 bool verif_cases_encore_disponible(char plateau[9]){
     for (int i = 0; i < 9; i++)
@@ -265,11 +265,11 @@ bool verif_cases_encore_disponible(char plateau[9]){
 /**
  * Principe :
  * Exécution du mode 1vs1
- * Le mode créé les joueurs, explique et montre un plateau.
+ * Le mode crée les joueurs, explique et montre un plateau.
  * Le jeu commence.
  * 1. Il affiche le plateau
- * 2. il demande au joueur X de placer son jeton
- * 3. il vérifie que sa réponse est valable (valeur correspondant à une case libre)
+ * 2. Il demande au joueur X de placer son jeton
+ * 3. Il vérifie que sa réponse est valable (valeur correspondant à une case libre)
  * 4. Il modifie la liste pour y indiquer le symbole du joueur
  * 5. Il exécute une fonction pour vérifier si le joueur ne vient pas de gagner.
  * 6. Il vérifie s'il reste une case libre
@@ -393,7 +393,7 @@ void partie_de_jeu(bool modeIA, bool modeIAAvance)
 void menu()
 {
     cout << "==========================" << "BIENVENUE DANS TIC TAC IMAC" << "==========================" << endl;
-    cout << "Choissez un mode de jeu en répondant par la valeur associée :" << endl;
+    cout << "Choisissez un mode de jeu en répondant par la valeur associée :" << endl;
     cout << "   1. Mode deux joueurs" << endl;
     cout << "   2. Mode contre IA Aléatoire" << endl;
     cout << "   3. Mode contre IA Avancé" << endl;
@@ -403,7 +403,7 @@ void menu()
     string reponseSansEspace;
     do {
         if (reponse != "") {
-            cout << "Votre réponse n'est pas valide, veuillez indiquer le chiffre associé à l'option voulu" << endl;
+            cout << "Votre réponse n'est pas valide, veuillez indiquer le chiffre associé à l'option voulue." << endl;
         }
         cout << "Votre choix : >> ";
         getline(cin, reponse);

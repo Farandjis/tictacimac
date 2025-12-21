@@ -111,9 +111,9 @@ bool verif_joueur_gagnant(char plateau[9]){
 
 
     // VERIFICATION A LA DIAGONALE (bas gauche - haut droite) =====================
-    char valeurCaseTouteEnBasAGauche = plateau[7];
+    char valeurCaseTouteEnBasAGauche = plateau[6];
     int nbDeFoisMemeValeurCase = 0;
-    for (int i = 7; i > 0; i -= 2)
+    for (int i = 6; i > 0; i -= 2)
     {
         // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
         if (valeurCaseTouteEnBasAGauche == plateau[i])
@@ -127,9 +127,9 @@ bool verif_joueur_gagnant(char plateau[9]){
     }
 
     // VERIFICATION A LA DIAGONALE (haut gauche - bas droit) =====================
-    char valeurCaseTouteEnHautAGauche = plateau[1];
+    char valeurCaseTouteEnHautAGauche = plateau[0];
     nbDeFoisMemeValeurCase = 0;
-    for (int i = 1; i < 9; i += 4)
+    for (int i = 0; i < 9; i += 4)
     {
         // (valeurCaseToutEnHaut - '0') pour récupérer le caractère  et non la valeur ASCII du caractère
         if (valeurCaseTouteEnHautAGauche == plateau[i])
@@ -182,11 +182,11 @@ void mode_deux_joueurs()
 {
 
     // INITIALISATION ===========================================================
-    // Player joueur1 = createPlayer();
-    // Player joueur2 = createPlayer(joueur1.symbol);
+    Player joueur1 = createPlayer(); // création du joueur 1
+    Player joueur2 = createPlayer(joueur1.symbol); // création du joueur 2 dont on interdit le choix du caractère du joueur 1
 
-    Player joueur1 = asuppr("toto", "o");
-    Player joueur2 = asuppr("titi", "i");
+    // Player joueur1 = asuppr("toto", "o");
+    // Player joueur2 = asuppr("titi", "i");
     Player joueurs[2] = {joueur1, joueur2};
 
     cout << endl << "Bienvenue " << joueur1.name << " (" << joueur1.symbol << ")" << "  et  " << joueur2.name << " (" << joueur2.symbol << ") ! " << endl;
@@ -205,7 +205,7 @@ void mode_deux_joueurs()
     do {
         Player leJoueurQuiJoue = (quiJoue == 0) ? joueur1 : joueur2;
 
-        cout << endl << endl << "============================= " << "TOUR JOUEUR " << quiJoue + 1 << " (" << leJoueurQuiJoue.symbol << ") =============================";
+        cout << endl << endl << "============================= " << "TOUR " << leJoueurQuiJoue.name << " (" << leJoueurQuiJoue.symbol << ") =============================";
         cout << endl;
 
         string reponse = "";
@@ -229,7 +229,7 @@ void mode_deux_joueurs()
                 }
                 cout << endl;
             }
-            cout << "Joueur " << quiJoue + 1 << " quel case choisissez vous ?" << endl << ">> ";
+            cout << "Joueur " << leJoueurQuiJoue.name << " quel case choisissez vous ?" << endl << ">> ";
             getline(cin, reponse);
         } while (!verif_action_possible(reponse, plateau)); // ETAPE 3
 

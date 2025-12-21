@@ -221,7 +221,7 @@ void tests_verif_joueur_gagnant()
     // TEST VERIF PLATEAU DIAGO BG -> HD
     cout << "- test verif plateau en diago bg -> hd" << endl;
     nbTour = 0;
-    for (int i = 7; i > 0; i-=2)
+    for (int i = 6; i > 0; i-=2)
     {
         plateau[i] = 'x';
 

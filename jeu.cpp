@@ -5,6 +5,7 @@
 #include "jeu.h"
 
 #include <algorithm>
+#include <vector>
 
 #include "Player.h"
 
@@ -25,6 +26,24 @@ void draw_game_board(char plateau[9])
         cout << plateau[i] << " | ";
     }
 
+}
+
+
+string choixIAAuxHasard(char plateau[9]) {
+    vector<char> casesDisponibles;
+    srand((unsigned int)time(0)); // initialisation de la série aléatoire
+
+    for (int i = 0; i < 9; i++)
+    {
+        if (plateau[i] >= '1' && plateau[i] <= '9')
+        {
+            casesDisponibles.push_back(plateau[i]);
+        }
+    }
+
+    int idCaseChoisit = rand() % (casesDisponibles.size()); // tirage d'un nombre entre 0 et la taille du tableau casesDisponibles
+
+    return to_string(casesDisponibles[idCaseChoisit]  - '0'); // le -'0' permet de convertir en entier (qu'on renvoi comme string car on manipule des string dans la suite du prog)
 }
 
 
@@ -184,15 +203,15 @@ void mode_deux_joueurs(bool modeIA)
     // INITIALISATION ===========================================================
     Player joueur1;
     if (modeIA) {
-        joueur1 = creerDirectementUnJoueur("IA", "O"); // création du joueur 1 IA
+        joueur1 = creerDirectementUnJoueur("IA", "A"); // création du joueur 1 IA
     }
     else {
         joueur1 = createPlayer(); // création du joueur 1 humain
     }
     Player joueur2 = createPlayer(joueur1.symbol); // création du joueur 2 humain dont on interdit le choix du caractère du joueur 1
 
-    // Player joueur1 = asuppr("toto", "o");
-    // Player joueur2 = asuppr("titi", "i");
+
+    // Player joueur2 = creerDirectementUnJoueur("titi", "i"); // pour moi
     Player joueurs[2] = {joueur1, joueur2};
 
     cout << endl << "Bienvenue " << joueur1.name << " (" << joueur1.symbol << ")" << "  et  " << joueur2.name << " (" << joueur2.symbol << ") ! " << endl;
@@ -205,6 +224,8 @@ void mode_deux_joueurs(bool modeIA)
     int tirage = rand()%2; // tirage d'un nombre entre 0 et 1
     cout << endl << endl;
     cout << "Par tirage aléatoire, le joueur " << joueurs[tirage].name << " est invité à commencer la partie." << endl;
+
+
 
     int quiJoue = tirage;
     // PARTIE
@@ -235,8 +256,16 @@ void mode_deux_joueurs(bool modeIA)
                 }
                 cout << endl;
             }
-            cout << "Joueur " << leJoueurQuiJoue.name << " quel case choisissez vous ?" << endl << ">> ";
-            getline(cin, reponse);
+
+            if (modeIA && quiJoue == 0) {
+                // si le mode IA est actif et que c'est le tour du joueur 1 (note : l'IA est joeuur 1)
+                reponse = choixIAAuxHasard(plateau);
+                cout << ">> L'IA a choisit : " << reponse << endl;
+            }
+            else {
+                cout << "Joueur " << leJoueurQuiJoue.name << " quel case choisissez vous ?" << endl << ">> ";
+                getline(cin, reponse);
+            }
         } while (!verif_action_possible(reponse, plateau)); // ETAPE 3
 
         // ETAPE 4
@@ -263,7 +292,6 @@ void mode_deux_joueurs(bool modeIA)
 
         // ETAPE 7
         quiJoue = (quiJoue+1) % 2;
-        cout << quiJoue << endl;
     } while (true);
 }
 

@@ -18,6 +18,6 @@ bool verif_action_possible(string action, char plateau[9]);
 bool verif_joueur_gagnant(char plateau[9]);
 bool verif_cases_encore_disponible(char plateau[9]);
 
-
+string choixIAAuxHasard(char plateau[9]);
 
 #endif //JEU_H

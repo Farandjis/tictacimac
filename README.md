@@ -4,7 +4,7 @@ E3 IMAC
 <div align="center">
 <img height="95"  src="readme_src/esiee-scaled.jpg" title="logo esiee paris"/>
 
-# SAÉ INF3-FI - Cluster Installation
+# Projet Prog & Algo E3 IMAC
 
 ---
 
